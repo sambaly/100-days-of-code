@@ -33,7 +33,9 @@ try {
 } catch (error) {
     console.log(error);
     chosenMaxLife = 100;
-}   
+} finally {
+    
+}
 
 let currentMonsterHealth = chosenMaxLife;
 let currentPlayerHealth = chosenMaxLife;

@@ -27,56 +27,40 @@ function writeToLog(
     console.log("logEntries ==> ", logEntries);
 }
 
-function calculateResult(calculationType) {
+function calculate(operation) {
     const enteredNumber = getUserNumberInput();
     const initialResult = currentResult;
+
     let mathOperator;
 
     if (
-        calculationType !== "ADD" &&
-        calculationType !== "SUBTRACT" &&
-        calculationType !== "MULTIPLY" &&
-        calculationType !== "DIVIDE" ||
+        operation !== "ADD" &&
+        operation !== "SUBTRACT" &&
+        operation !== "MULTIPLY" &&
+        operation !== "DIVIDE" ||
         !enteredNumber
     ) {
         return;
     }
-    
-    if (calculationType === "ADD") {
+
+    if (operation === 'ADD') {
         currentResult += enteredNumber;
         mathOperator = "+";
-    } else if (calculationType === "SUBTRACT") {
+    } else if (operation === 'SUBTRACT') {
         currentResult -= enteredNumber;
         mathOperator = "-";
-    } else if (calculationType === "MULTIPLY") {
+    } else if (operation === 'MULTIPLY') {
         currentResult *= enteredNumber;
         mathOperator = "*";
-    } else if (calculationType === 'DIVIDE') {
+    } else {
         currentResult /= enteredNumber;
         mathOperator = "/";
     }
-
     createAndWriteOutput(mathOperator, initialResult, enteredNumber);
-    writeToLog(calculationType, initialResult, enteredNumber, currentResult);
+    writeToLog(operation, initialResult, enteredNumber, currentResult);
 }
 
-function add() {
-    calculateResult("ADD");
-}
-
-function subtract() {
-    calculateResult("SUBTRACT");
-}
-
-function multiply() {
-    calculateResult("MULTIPLY");
-}
-
-function divide() {
-    calculateResult("DIVIDE");
-}
-
-addBtn.addEventListener("click", add);
-subtractBtn.addEventListener("click", subtract);
-multiplyBtn.addEventListener("click", multiply);
-divideBtn.addEventListener("click", divide);
+addBtn.addEventListener("click", calculate.bind(this, 'ADD'));
+subtractBtn.addEventListener("click", calculate.bind(this, 'SUBTRACT'));
+multiplyBtn.addEventListener("click", calculate.bind(this, 'MULTIPLY'));
+divideBtn.addEventListener("click", calculate.bind(this, 'DIVIDE'));
